@@ -46,6 +46,8 @@ function ExpenseList(props){
         </Table.Body>
         {/* </Table> */}
       </Table>
+      <Button size='small' onClick={() => props.openAndAdd()}>Add item</Button>
+
      </>
     )
 }

@@ -11,7 +11,7 @@ const EditExpenseModal = (props) => {
         <Form onSubmit={props.closeAndEdit}>
         <Label>Date:</Label>
           <Form.Input
-            type="date"
+            type="text"
             name="exp_date"
             value={props.expenseToEdit.exp_date}
             onChange={props.handleEditChange}
@@ -33,13 +33,13 @@ const EditExpenseModal = (props) => {
           <Label>Comment:</Label>
           <Form.Input
             type="text"
-            name="comment"
+            name="exp_comment"
             value={props.expenseToEdit.exp_comment}
             onChange={props.handleEditChange}
           />
           <Modal.Actions>
             <Button color="green" type="submit">
-              Edit Song
+              Submit
             </Button>
           </Modal.Actions>
         </Form>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ExpenseList from './ExpenseList';
-import CreateExpenseForm from './CreateExpenseForm';
+import AddExpenseModal from './AddExpenseModal';
 import EditExpenseModal from './EditExpenseModal';
 import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
-// import { Grid } from 'semantic-ui-react';
 
 
 class ExpenseContainer extends Component {
@@ -21,7 +20,9 @@ class ExpenseContainer extends Component {
             id: '',
   
         },
-        showEditModal: false
+
+        showEditModal: false,
+        showAddModal: false
       }
     }
 
@@ -42,14 +43,14 @@ class ExpenseContainer extends Component {
       }
     };
 
+
     deleteExpense = async (id) => {
         console.log(id);
         const deleteExpenseResponse = await axios.delete(
           `${process.env.REACT_APP_FLASK_API_URL}/api/v1/expenses/${id}`
         );
         console.log(deleteExpenseResponse);
-        // Now that the db has deleted our item, we need to remove it from state
-        // Then make the delete request, then remove the song from the state array using filter
+       
         this.setState({ expenses: this.state.expenses.filter((expense) => expense.id !== id) });
     
         console.log(deleteExpenseResponse, ' response from Flask server');
@@ -67,6 +68,15 @@ class ExpenseContainer extends Component {
         });
       };
     
+      openAndAdd = () => {
+          console.log("in open and add")
+
+      
+        this.setState({
+          showAddModal: true,
+        });
+      };
+    
       handleEditChange = (e) => {
         this.setState({
           expenseToEdit: {
@@ -75,6 +85,7 @@ class ExpenseContainer extends Component {
           },
         });
       };
+    
     
       closeAndEdit = async (e) => {
         e.preventDefault();
@@ -105,18 +116,60 @@ class ExpenseContainer extends Component {
         }
       };
 
+      closeAndAdd = async (e, expense) => {
+        e.preventDefault();
+        console.log(expense);
+    
+        try {
+            const addExpenseResponse = await axios.post(
+            process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/',
+            expense,
+            {headers: {
+                 'Content-Type': 'application/json'
+                  } 
+            }
+          );
+    
+          console.log(addExpenseResponse.data.data, ' this is response');
+          this.setState({
+            expenses: [...this.state.expenses, addExpenseResponse.data.data],
+          });
+          this.setState({
+            showAddModal: false
+          });
+        } catch (err) {
+          console.log('error', err);
+        }
+      };
+      cancelAddAndClose = () => {
+        
+          this.setState({
+            showAddModal: false
+          });
+        
+      };
+
     render(){
       return (
          <> 
         <ExpenseList expenses={this.state.expenses}
                      deleteExpense={this.deleteExpense}
                      openAndEdit={this.openAndEdit}
+                    //  open={this.state.showAddModal}
+                     openAndAdd={this.openAndAdd}
+                    //  handleAdd={this.handleAdd}
                       />
         <EditExpenseModal
                     open={this.state.showEditModal}
                     handleEditChange={this.handleEditChange}
                     expenseToEdit={this.state.expenseToEdit}
                     closeAndEdit={this.closeAndEdit}
+                  />
+        <AddExpenseModal
+                    open={this.state.showAddModal}
+                    handleAdd={this.handleAdd}
+                    closeAndAdd={this.closeAndAdd}
+                    // cancelAddAndClose={this.cancelAddAndClose}
                   />
         </>
         )
