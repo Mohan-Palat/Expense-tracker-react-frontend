@@ -3,6 +3,9 @@ import axios from 'axios';
 import ExpenseList from './ExpenseList';
 import AddExpenseModal from './AddExpenseModal';
 import EditExpenseModal from './EditExpenseModal';
+import AppHeader from './AppHeader';
+import AppCharts from './AppCharts';
+// import SearchExpensesByDate from './SearchExpensesByDate';
 import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
 
 
@@ -12,18 +15,24 @@ class ExpenseContainer extends Component {
   
       this.state = {
         expenses: [],
+        expenseReload: false,
         expenseToEdit: {
             exp_date: '',
             exp_descr: '',
             exp_amt: '',
-            exp_comment: '',
+            exp_category: '',
             id: '',
+          
   
         },
 
         showEditModal: false,
         showAddModal: false
       }
+    }
+
+    expensesByDate = (expenses) => {
+      this.setState({ expenses: expenses });
     }
 
     componentDidMount(){
@@ -34,9 +43,24 @@ class ExpenseContainer extends Component {
         const parsedExpenses = await axios(
           process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
         );
-        console.log(parsedExpenses.data.data);
-        await this.setState({
+        // console.log(parsedExpenses.data.data);
+         this.setState({
+           expenseReload: true,
           expenses: parsedExpenses.data.data,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getExpensesByDate = async () => {
+      try {
+        const parsedExpensesByDate = await axios(
+          process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
+        );
+        console.log(parsedExpensesByDate.data.data);
+        await this.setState({
+          expenses: parsedExpensesByDate.data.data,
         });
       } catch (err) {
         console.log(err);
@@ -141,17 +165,37 @@ class ExpenseContainer extends Component {
           console.log('error', err);
         }
       };
-      cancelAddAndClose = () => {
-        
+
+
+      updateExpensesList = async (e, expense) => {
+        e.preventDefault();
+        console.log(expense);
+    
+       
           this.setState({
-            showAddModal: false
-          });
-        
+            name: "",
+            breed: "",
+            owner: "",
+          })
+
       };
+    
+      // cancelAddAndClose = () => {
+        
+      //     this.setState({
+      //       showAddModal: false
+      //     });
+        
+      // };
 
     render(){
+      console.log(this.state)
       return (
          <> 
+        {/* <SearchExpensesByDate expensesByDate={this.expensesByDate}/>  */}
+        <AppHeader/>
+        <AppCharts expenses={this.state.expenses}
+                    expenseReload={this.state.expenseReload}/>
         <ExpenseList expenses={this.state.expenses}
                      deleteExpense={this.deleteExpense}
                      openAndEdit={this.openAndEdit}

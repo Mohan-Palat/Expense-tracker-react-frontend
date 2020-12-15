@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
+import { Modal, Form, Button, Label, Header, Dropdown } from 'semantic-ui-react';
 
 const EditExpenseModal = (props) => {
   console.log("in edit expense modal")  
@@ -30,11 +30,11 @@ const EditExpenseModal = (props) => {
             value={props.expenseToEdit.exp_amt}
             onChange={props.handleEditChange}
           />
-          <Label>Comment:</Label>
+          <Label>Category:</Label>
           <Form.Input
             type="text"
-            name="exp_comment"
-            value={props.expenseToEdit.exp_comment}
+            name="exp_category"
+            value={props.expenseToEdit.exp_category}
             onChange={props.handleEditChange}
           />
           <Modal.Actions>

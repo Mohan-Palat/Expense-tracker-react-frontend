@@ -15,8 +15,8 @@ function ExpenseList(props){
         </Table.Cell>
         <Table.Cell>{expense.exp_descr}</Table.Cell>
         <Table.Cell>{expense.exp_date}</Table.Cell>
-        <Table.Cell>{expense.exp_amt}</Table.Cell>
-        <Table.Cell>{expense.exp_comment}</Table.Cell>
+        <Table.Cell>${expense.exp_amt}</Table.Cell>
+        <Table.Cell>{expense.exp_category}</Table.Cell>
         <Table.Cell>
             <Button size='small' onClick={() => props.openAndEdit(expense)}>Edit
             </Button>
@@ -36,7 +36,7 @@ function ExpenseList(props){
           <Table.HeaderCell>Description</Table.HeaderCell>
           <Table.HeaderCell>Date</Table.HeaderCell>
           <Table.HeaderCell>Amount</Table.HeaderCell>
-          <Table.HeaderCell>Comment</Table.HeaderCell>
+          <Table.HeaderCell>Category</Table.HeaderCell>
           <Table.HeaderCell>Edit</Table.HeaderCell>
           <Table.HeaderCell>Delete</Table.HeaderCell>
         </Table.Row>

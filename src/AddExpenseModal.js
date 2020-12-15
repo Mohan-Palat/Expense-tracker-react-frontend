@@ -8,13 +8,22 @@ class AddExpenseModal extends Component {
             exp_date: '',
             exp_descr: '',
             exp_amt: '',
-            exp_comment: '',
-          }
+            exp_category: '',
+            options: [
+              {value:'Car', text:'Car'},
+              {value:'Phone', text:'Phone'},
+              {value:'Dining', text:'Dining'},
+            ],
+            selected: ''
+            }
     }
    
 
     handleChange = (e) => {
+        console.log('in handle change Add Exp')
+        console.log(e) 
         this.setState({[e.currentTarget.name]: e.currentTarget.value})
+        console.log(this.state)
       }
       
     render(){
@@ -44,11 +53,15 @@ class AddExpenseModal extends Component {
             value={this.state.exp_amt}
             onChange={this.handleChange}
           />
-          <Label>Comment:</Label>
-          <Form.Input
+          <Label>Category:</Label>
+          <Form.Dropdown
+            placeholder="Select Category"
+            fluid selection
+            options={this.state.options}
             type="text"
-            name="exp_comment"
-            value={this.state.exp_comment}
+            name="exp_category"
+            // value={this.state.exp_category}
+            value={this.state.options}
             onChange={this.handleChange}
           />
           <Modal.Actions>
