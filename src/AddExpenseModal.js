@@ -26,6 +26,12 @@ class AddExpenseModal extends Component {
         console.log(this.state)
       }
       
+      selectOption = (event, data) => {
+        this.setState({
+          exp_category: data.value,
+        });
+      };
+      
     render(){
       return (
     <Modal open={this.props.open}>
@@ -55,15 +61,23 @@ class AddExpenseModal extends Component {
           />
           <Label>Category:</Label>
           <Form.Dropdown
+              placeholder="Select Category"
+              fluid
+              selection
+              options={this.state.options}
+              name="exp_category"
+              onChange={this.selectOption}
+            />
+          {/* <Form.Input
             placeholder="Select Category"
-            fluid selection
-            options={this.state.options}
+            // fluid selection
+            // options={this.state.options}
             type="text"
             name="exp_category"
-            // value={this.state.exp_category}
-            value={this.state.options}
+            value={this.state.exp_category}
+            // value={this.state.options}
             onChange={this.handleChange}
-          />
+          /> */}
           <Modal.Actions>
             <Button color="green" type="submit">
               Submit

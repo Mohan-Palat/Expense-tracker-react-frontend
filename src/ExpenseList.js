@@ -29,6 +29,7 @@ function ExpenseList(props){
 
   return (
       <>  
+         <Button size='small' onClick={() => props.openAndAdd()}>Add item</Button>
       <Table celled compact definition>
       <Table.Header fullWidth>
         <Table.Row>
@@ -46,7 +47,7 @@ function ExpenseList(props){
         </Table.Body>
         {/* </Table> */}
       </Table>
-      <Button size='small' onClick={() => props.openAndAdd()}>Add item</Button>
+   
 
      </>
     )
