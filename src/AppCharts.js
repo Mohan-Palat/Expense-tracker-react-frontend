@@ -15,7 +15,7 @@ class AppCharts extends Component {
       console.log('datasets', this.state.datasets)
     return (
       <div className="chart-div">
-        <div>
+        <div className="chart-div-left">
           <h1>Spending Chart</h1>
           <Pie
             data={{
@@ -25,8 +25,10 @@ class AppCharts extends Component {
             // height='50%'
           />
         </div>
-        {/* <div><SearchExpensesByDate/></div> */}
-        <Button size='small' onClick={() => this.props.openDates()}>Select Dates</Button>
+        <div className="chart-div-right">    
+        <Button size='small' onClick={() => this.props.openDates()}>Select Transactions by Dates</Button>
+        <Button size='small' onClick={() => this.props.openAndAdd()}>Add a New Transaction</Button>
+        </div>
 
       </div>
     );

@@ -45,6 +45,8 @@ class ExpenseContainer extends Component {
         process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
       );
       console.log(parsedExpenses.data.data);
+      await this.setState({expenses: parsedExpenses.data.data}); //added 
+      await this.setState({expensesBkup: parsedExpenses.data.data}); //added 
       const exp = await this.parseExpenses(parsedExpenses.data.data);
 
     } catch (err) {
@@ -73,13 +75,15 @@ class ExpenseContainer extends Component {
       reload: true,
       labels: expenseKeys,
       datasets: tempState,
-      expenses: exp,
-      expensesBkup: exp,
+      // expenses: exp, //removed
+      // expensesBkup: exp, //removed
     }));
 
   };
-  closeDatesModalGetExpenses = (e, dates) => {
+  closeDatesModalGetExpenses = async (e, dates) => {
     e.preventDefault();
+
+    await this.getExpenses()
 
     this.setState({showDatesModal: false})
     console.log('dates being received', dates)
@@ -130,11 +134,11 @@ class ExpenseContainer extends Component {
 
 
     });
-    this.setState({ expenses: newExpArrayByDate });
+    await this.setState({ expenses: newExpArrayByDate });
     this.parseExpenses(newExpArrayByDate)
     console.log('expenses from 135', this.state.expenses)
     console.log('expenses from 136', this.state.expensesBkup)
-    console.log('expenses from 136', newExpArrayByDate)
+    console.log('expenses from 137', newExpArrayByDate)
     
   };
 
@@ -194,6 +198,7 @@ class ExpenseContainer extends Component {
         if (expense.id === editResponse.data.data.id) {
           expense = editResponse.data.data;
         }
+        console.log(expense)
         return expense;
       });
       this.setState({
@@ -229,7 +234,8 @@ class ExpenseContainer extends Component {
     } catch (err) {
       console.log('error', err);
     }
-    
+    this.getExpenses()
+    this.parseExpenses(this.state.expenses);
   };
 
   // closeDatesModal = (e, dates) => {
@@ -265,6 +271,7 @@ class ExpenseContainer extends Component {
           datasets={this.state.datasets}
           labels={this.state.labels}
           openDates={this.openDates}
+          openAndAdd={this.openAndAdd}
         />
         <ExpenseList
           expenses={this.state.expenses}

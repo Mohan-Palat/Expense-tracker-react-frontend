@@ -64,3 +64,14 @@
 
   height: 375px;
 }
+.chart-div-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  background-color: rgb(151, 224, 151);
+  border: solid, black, 2px;
+
+}
