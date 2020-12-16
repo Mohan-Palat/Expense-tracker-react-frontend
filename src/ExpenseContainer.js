@@ -6,14 +6,16 @@ import EditExpenseModal from './EditExpenseModal';
 import SelectDatesModal from './SelectDatesModal';
 import AppHeader from './AppHeader';
 import AppCharts from './AppCharts';
-// import SearchExpensesByDate from './SearchExpensesByDate';
 import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
+
+
 class ExpenseContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expenses: [],
       expensesBkup: [],
+      categories: [],
       expenseToEdit: {
         exp_date: '',
         exp_descr: '',
@@ -27,18 +29,20 @@ class ExpenseContainer extends Component {
       datasets: [
         {
           data: [],
-          backgroundColor: ['red', 'green', 'yellow', 'blue', 'orange'],
+          backgroundColor: ['red', 'purple','green', 'yellow', 'blue', 'orange'],
         },
       ],
       labels: [],
     };
   }
-  expensesByDate = (expenses) => {
-    this.setState({ expenses: expenses });
-  };
+  // expensesByDate = (expenses) => {
+  //   this.setState({ expenses: expenses });
+  // };
   componentDidMount() {
     this.getExpenses();
+    this.getCategories();
   }
+
   getExpenses = async () => {
     try {
       const parsedExpenses = await axios(
@@ -52,11 +56,21 @@ class ExpenseContainer extends Component {
     } catch (err) {
       console.log(err);
     }
-    console.log('DAY', this.state.expenses[0].exp_date.slice(5,7))
-    console.log('YEAR', this.state.expenses[0].exp_date.slice(8,11))
-    console.log('MONTH', this.state.expenses[0].exp_date.slice(12,16))
-
   };
+
+  getCategories = async () => {
+    try {
+      const allCategories = await axios(
+        process.env.REACT_APP_FLASK_API_URL + '/api/v1/categories/'
+      );
+      console.log(allCategories.data.data);
+      await this.setState({categories: allCategories.data.data}); 
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   parseExpenses = (exp) => {
     let expenseObj = {};
     exp.forEach((obj) => {
@@ -291,6 +305,7 @@ class ExpenseContainer extends Component {
           open={this.state.showAddModal}
           handleAdd={this.handleAdd}
           closeAndAdd={this.closeAndAdd}
+          categories={this.state.categories}
           // cancelAddAndClose={this.cancelAddAndClose}
         />
         <SelectDatesModal

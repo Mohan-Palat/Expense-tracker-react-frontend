@@ -9,16 +9,31 @@ class AddExpenseModal extends Component {
             exp_descr: '',
             exp_amt: '',
             exp_category: '',
-            options: [
-              {value:'Car', text:'Car'},
-              {value:'Phone', text:'Phone'},
-              {value:'Dining', text:'Dining'},
-            ],
+            options: [],
             selected: ''
             }
     }
-   
 
+    componentDidMount() {
+      this.populateCategories(this.props.categories);
+    }
+   
+    populateCategories = async (categories) => {
+      console.log(this.props.categories)
+      let categoryOptions = [];
+      categories.forEach((cat) => {
+        let category = {};
+        console.log(cat)
+        category.value = cat.category
+        category.text = cat.category
+        categoryOptions.push(category)
+        console.log(category)
+        console.log(categoryOptions)
+      })
+      await this.setState({options: categoryOptions})
+      console.log(this.state.options)
+    }
+      
     handleChange = (e) => {
         console.log('in handle change Add Exp')
         console.log(e) 
