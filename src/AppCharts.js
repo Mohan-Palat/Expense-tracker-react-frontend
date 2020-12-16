@@ -9,6 +9,11 @@ class AppCharts extends Component {
     datasets: this.props.datasets,
   }};
   render() {
+    let totalExpenses = 0;
+    this.state.datasets[0].data.forEach((expAmt) => {
+      totalExpenses += expAmt
+    })
+    console.log(totalExpenses)
     return (
       <>  
       <div className="chart-div">
@@ -20,6 +25,10 @@ class AppCharts extends Component {
               datasets: this.props.datasets,
             }}
           />
+        </div>
+        <div>
+            <h3 className="totalExpHdr">Total Expenses by dates</h3>
+            <h4>${totalExpenses}</h4>
         </div>
         <div className="chart-div-right">    
         <div className="transButton" >
