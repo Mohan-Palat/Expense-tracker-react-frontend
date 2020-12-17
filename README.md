@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Expense Tracker application URL for frontend
+https://expense-tracker-marce-react.herokuapp.com/
+# Expense Tracker application URL for backend
+https://expense-tracker-marce.herokuapp.com/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Technologies for this Build
+React
+Axios,
+Flask,
+Postgres,
+Peewee,
+chart.js,
+semantic ui,
+CSS
 
-In the project directory, you can run:
 
-### `npm start`
+# React Components for front end code
+AddExpenseModal
+AppCharts
+AppHeader
+EditExpenseModal
+ExpenseContainer
+ExpenseList
+SelectdatesModal
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Data Models for backend code
+Expenses schema - for each transaction expense
+Category schema - for expense categories
 
-### `npm test`
+# Backend API's used in project
+Calls the database to retrieve, add, update and delete expesenses.
+https://expense-tracker-marce.herokuapp.com/api/v1/expenses/
+Calls the database to retrieve expense categories
+https://expense-tracker-marce.herokuapp.com/api/v1/categories/
+ 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Additional features that I would like to add at a later date:
+Budget versus spend information by month
+Modelling to show what changes in spending would do to savings
+Budgeting by category
+User setups for app
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Lessons Learned
+Started out using semantic ui from the beginning on this project since I liked the modal functioanlity that was used on an in class project.  I ran into a few issues
+that really occupied a lot of my time trying to figure out a solution.  Spent a lot of time reading documentation to figure out one issue and the other I was assisted with.  Probably better to be more familiar with a tech stack from the beginning when working on a tight timeline.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Approach:
+Set out to build an expense tracker application that had several features.  Tracking transactions.  Being able to add, update and delete transactions. Searching transactions by date ranges and summing transactions by date ranges in order to see spending patterns by for an app user.  Really wanted to add a user schema to this application in order to track information by user in the database, but was not able to implement that feature in the timeframe.
 
-### `npm run eject`
+# Functionality currently working on for future 
+Add user schema, buget modelling to forcast savings based on changes in spending habits.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# User stories for Project 4 - Expense Tracker
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+User stories:
+As a user I want to be able to add the amount of my expenses to an app for tracking.
+As a user I want to be able to add the date of my expenses to an app for tracking.
+As a user I want to be able to add the description of my expenses for future review.
+As a user I want the ability to categorize my expenses when entered.
+As a user I want to be able to see a listing of all my expenses entered.
+As a user I want to be able to see a listing of my expenses based on date ranges.
+As a user I want to be able to update a previously entered expense.
+As a user I want to be able to delete a previously entered expense.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Wire Frame Diagram
+![ExpenseTrackerAppUserStories](ExpenseTrackerAppUserStories.jpg)
+![ExpenseTrackerAppWireFrames](ExpenseTrackerAppWireFrames.jpg)
