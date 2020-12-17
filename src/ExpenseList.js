@@ -1,9 +1,7 @@
 import React from 'react';
-// import { Table, Button} from 'semantic-ui-react';
-// import { Table } from 'semantic-ui-react';
 import { Button, Checkbox, Icon, Table } from 'semantic-ui-react'
 // import Table from '@bit/semantic-org.semantic-ui-react.table'
-import EditExpenseModal from './EditExpenseModal';
+// import EditExpenseModal from './EditExpenseModal';
 
 function ExpenseList(props){
 

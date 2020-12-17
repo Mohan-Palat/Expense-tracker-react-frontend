@@ -6,7 +6,9 @@ import EditExpenseModal from './EditExpenseModal';
 import SelectDatesModal from './SelectDatesModal';
 import AppHeader from './AppHeader';
 import AppCharts from './AppCharts';
-import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
+// import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
+import { Modal, Form, Button, Label, Header, Table, Input, Dropdown, Content } from 'semantic-ui-react';
+
 
 
 class ExpenseContainer extends Component {
@@ -15,7 +17,7 @@ class ExpenseContainer extends Component {
     this.state = {
       expenses: [],
       expensesBkup: [],
-      categories: [],
+      categories:['Rent','Dining'],
       expenseToEdit: {
         exp_date: '',
         exp_descr: '',
@@ -39,8 +41,10 @@ class ExpenseContainer extends Component {
   //   this.setState({ expenses: expenses });
   // };
   componentDidMount() {
+    console.log('in did mount')
     this.getExpenses();
     this.getCategories();
+    console.log(this.state)
   }
 
   getExpenses = async () => {
@@ -59,12 +63,15 @@ class ExpenseContainer extends Component {
   };
 
   getCategories = async () => {
+    console.log('in get categories')
     try {
       const allCategories = await axios(
         process.env.REACT_APP_FLASK_API_URL + '/api/v1/categories/'
       );
+      
+      // this.setState({categories: allCategories.data.data}); 
       console.log(allCategories.data.data);
-      await this.setState({categories: allCategories.data.data}); 
+      console.log(this.state.categories);
 
     } catch (err) {
       console.log(err);
@@ -94,6 +101,7 @@ class ExpenseContainer extends Component {
     }));
 
   };
+  
   closeDatesModalGetExpenses = async (e, dates) => {
     e.preventDefault();
 
@@ -168,6 +176,7 @@ class ExpenseContainer extends Component {
     console.log(deleteExpenseResponse, ' response from Flask server');
     this.parseExpenses(this.state.expenses)
   };
+
   openAndEdit = (expenseFromTheList) => {
     console.log('in open and edit');
     console.log(expenseFromTheList, ' expenseToEdit  ');
@@ -178,6 +187,7 @@ class ExpenseContainer extends Component {
       },
     });
   };
+
   openAndAdd = () => {
     console.log('in open and add');
     this.setState({
@@ -197,6 +207,17 @@ class ExpenseContainer extends Component {
         [e.currentTarget.name]: e.currentTarget.value,
       },
     });
+  };
+  handleEditCancel = () => {
+    this.setState({
+      showEditModal: false,
+    });
+    // this.setState({
+    //   expenseToEdit: {
+    //     ...this.state.expenseToEdit,
+    //     [e.currentTarget.name]: e.currentTarget.value,
+    //   },
+    // });
   };
   closeAndEdit = async (e) => {
     e.preventDefault();
@@ -252,33 +273,11 @@ class ExpenseContainer extends Component {
     this.parseExpenses(this.state.expenses);
   };
 
-  // closeDatesModal = (e, dates) => {
-  //   e.preventDefault();
-  //       this.setState({showDatesModal: false})
-  //       console.log('dates being received', dates)
-  //       getExpensesByDate(dates)
-  //     };
-
-
-  // updateExpensesList = async (e, expense) => {
-  //   e.preventDefault();
-  //   console.log(expense);
-  //   this.setState({
-  //     name: '',
-  //     breed: '',
-  //     owner: '',
-  //   });
-  // };
-  // cancelAddAndClose = () => {
-  //     this.setState({
-  //       showAddModal: false
-  //     });
-  // };
   render() {
     console.log(this.state);
     return (
       <>
-        {/* <SearchExpensesByDate expensesByDate={this.expensesByDate}/>  */}
+        
         <AppHeader />
         <AppCharts
           expenses={this.state.expenses}
@@ -286,6 +285,7 @@ class ExpenseContainer extends Component {
           labels={this.state.labels}
           openDates={this.openDates}
           openAndAdd={this.openAndAdd}
+          categories={this.state.categories}
         />
         <ExpenseList
           expenses={this.state.expenses}
@@ -294,6 +294,7 @@ class ExpenseContainer extends Component {
           //  open={this.state.showAddModal}
           openAndAdd={this.openAndAdd}
           //  handleAdd={this.handleAdd}
+          categories={this.state.categories}
         />
         <EditExpenseModal
           open={this.state.showEditModal}
@@ -306,7 +307,6 @@ class ExpenseContainer extends Component {
           handleAdd={this.handleAdd}
           closeAndAdd={this.closeAndAdd}
           categories={this.state.categories}
-          // cancelAddAndClose={this.cancelAddAndClose}
         />
         <SelectDatesModal
           open={this.state.showDatesModal}
@@ -320,229 +320,3 @@ class ExpenseContainer extends Component {
   }
 }
 export default ExpenseContainer;
-
-// old code
-// import React, { Component } from 'react';
-// import axios from 'axios';
-// import ExpenseList from './ExpenseList';
-// import AddExpenseModal from './AddExpenseModal';
-// import EditExpenseModal from './EditExpenseModal';
-// import AppHeader from './AppHeader';
-// import AppCharts from './AppCharts';
-// // import SearchExpensesByDate from './SearchExpensesByDate';
-// import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
-
-
-// class ExpenseContainer extends Component {
-//     constructor(props){
-//       super(props);
-  
-//       this.state = {
-//         expenses: [],
-//         expenseReload: false,
-//         expenseToEdit: {
-//             exp_date: '',
-//             exp_descr: '',
-//             exp_amt: '',
-//             exp_category: '',
-//             id: '',
-          
-  
-//         },
-
-//         showEditModal: false,
-//         showAddModal: false
-//       }
-//     }
-
-//     expensesByDate = (expenses) => {
-//       this.setState({ expenses: expenses });
-//     }
-
-//     componentDidMount(){
-//       this.getExpenses();
-//     }
-//     getExpenses = async () => {
-//       try {
-//         const parsedExpenses = await axios(
-//           process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
-//         );
-//         // console.log(parsedExpenses.data.data);
-//          this.setState({
-//            expenseReload: true,
-//           expenses: parsedExpenses.data.data,
-//         });
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     };
-
-//     getExpensesByDate = async () => {
-//       try {
-//         const parsedExpensesByDate = await axios(
-//           process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
-//         );
-//         console.log(parsedExpensesByDate.data.data);
-//         await this.setState({
-//           expenses: parsedExpensesByDate.data.data,
-//         });
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     };
-
-
-//     deleteExpense = async (id) => {
-//         console.log(id);
-//         const deleteExpenseResponse = await axios.delete(
-//           `${process.env.REACT_APP_FLASK_API_URL}/api/v1/expenses/${id}`
-//         );
-//         console.log(deleteExpenseResponse);
-       
-//         this.setState({ expenses: this.state.expenses.filter((expense) => expense.id !== id) });
-    
-//         console.log(deleteExpenseResponse, ' response from Flask server');
-//       };
-
-//       openAndEdit = (expenseFromTheList) => {
-//           console.log("in open and edit")
-//         console.log(expenseFromTheList, ' expenseToEdit  ');
-      
-//         this.setState({
-//           showEditModal: true,
-//           expenseToEdit: {
-//             ...expenseFromTheList,
-//           },
-//         });
-//       };
-    
-//       openAndAdd = () => {
-//           console.log("in open and add")
-
-      
-//         this.setState({
-//           showAddModal: true,
-//         });
-//       };
-    
-//       handleEditChange = (e) => {
-//         this.setState({
-//           expenseToEdit: {
-//             ...this.state.expenseToEdit,
-//             [e.currentTarget.name]: e.currentTarget.value,
-//           },
-//         });
-//       };
-    
-    
-//       closeAndEdit = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const editResponse = await axios.put(
-//             process.env.REACT_APP_FLASK_API_URL +
-//               '/api/v1/expenses/' +
-//               this.state.expenseToEdit.id,
-//             this.state.expenseToEdit
-//           );
-      
-//           console.log(editResponse, ' parsed edit');
-      
-//           const newExpenseArrayWithEdit = this.state.expenses.map((expense) => {
-//             if (expense.id === editResponse.data.data.id) {
-//               expense = editResponse.data.data;
-//             }
-      
-//             return expense;
-//           });
-      
-//           this.setState({
-//             showEditModal: false,
-//             expenses: newExpenseArrayWithEdit,
-//           });
-//         } catch (err) {
-//           console.log(err);
-//         }
-//       };
-
-//       closeAndAdd = async (e, expense) => {
-//         e.preventDefault();
-//         console.log(expense);
-    
-//         try {
-//             const addExpenseResponse = await axios.post(
-//             process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/',
-//             expense,
-//             {headers: {
-//                  'Content-Type': 'application/json'
-//                   } 
-//             }
-//           );
-    
-//           console.log(addExpenseResponse.data.data, ' this is response');
-//           this.setState({
-//             expenses: [...this.state.expenses, addExpenseResponse.data.data],
-//           });
-//           this.setState({
-//             showAddModal: false
-//           });
-//         } catch (err) {
-//           console.log('error', err);
-//         }
-//       };
-
-
-//       updateExpensesList = async (e, expense) => {
-//         e.preventDefault();
-//         console.log(expense);
-    
-       
-//           this.setState({
-//             name: "",
-//             breed: "",
-//             owner: "",
-//           })
-
-//       };
-    
-//       // cancelAddAndClose = () => {
-        
-//       //     this.setState({
-//       //       showAddModal: false
-//       //     });
-        
-//       // };
-
-//     render(){
-//       console.log(this.state)
-//       return (
-//          <> 
-//         {/* <SearchExpensesByDate expensesByDate={this.expensesByDate}/>  */}
-//         <AppHeader/>
-//         <AppCharts expenses={this.state.expenses}
-//                     expenseReload={this.state.expenseReload}/>
-//         <ExpenseList expenses={this.state.expenses}
-//                      deleteExpense={this.deleteExpense}
-//                      openAndEdit={this.openAndEdit}
-//                     //  open={this.state.showAddModal}
-//                      openAndAdd={this.openAndAdd}
-//                     //  handleAdd={this.handleAdd}
-//                       />
-//         <EditExpenseModal
-//                     open={this.state.showEditModal}
-//                     handleEditChange={this.handleEditChange}
-//                     expenseToEdit={this.state.expenseToEdit}
-//                     closeAndEdit={this.closeAndEdit}
-//                   />
-//         <AddExpenseModal
-//                     open={this.state.showAddModal}
-//                     handleAdd={this.handleAdd}
-//                     closeAndAdd={this.closeAndAdd}
-//                     // cancelAddAndClose={this.cancelAddAndClose}
-//                   />
-//         </>
-//         )
-//     }
-//   }
-  
-
-// export default ExpenseContainer

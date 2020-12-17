@@ -76,13 +76,13 @@
 
 }
 
-.addTransButton, .transButton {
+.addTransButton {
 
 margin: 10px;
 }
 .transButton {
 
-margin: 30px;
+margin: 50px;
 }
 
 .totalExpHdr {
@@ -92,4 +92,8 @@ margin: 30px;
 .addTransBtn1, .transBtn1 {
 width: 210px;
 margin: 20px;
+}
+
+.totalExpHdr {
+  margin: 20px;
 }

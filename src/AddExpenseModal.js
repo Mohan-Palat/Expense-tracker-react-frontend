@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
+import { Modal, Form, Button, Label, Header, Dropdown } from 'semantic-ui-react';
 
 class AddExpenseModal extends Component {
     constructor(props) {
@@ -9,16 +9,23 @@ class AddExpenseModal extends Component {
             exp_descr: '',
             exp_amt: '',
             exp_category: '',
-            options: [],
+            categories:[],
+            options: [{value: "Rent", text: "Rent"},
+                      {value: "Groceries", text: "Groceries"},
+                      {value: "Car", text: "Car"},
+                      {value: "Dining", text: "Dining"},
+                      {value: "Phone", text: "Phone"},
+                      {value: "Misc", text: "Misc"}],
             selected: ''
             }
     }
 
     componentDidMount() {
       this.populateCategories(this.props.categories);
+      console.log(this.props.categories)
     }
    
-    populateCategories = async (categories) => {
+    populateCategories = (categories) => {
       console.log(this.props.categories)
       let categoryOptions = [];
       categories.forEach((cat) => {
@@ -30,7 +37,7 @@ class AddExpenseModal extends Component {
         console.log(category)
         console.log(categoryOptions)
       })
-      await this.setState({options: categoryOptions})
+      //  this.setState({options: categoryOptions})
       console.log(this.state.options)
     }
       
