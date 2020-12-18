@@ -57,16 +57,17 @@ Add user schema, buget modelling to forcast savings based on changes in spending
 # User stories for Project 4 - Expense Tracker
 
 User stories:
-As a user I want to be able to add the amount of my expenses to an app for tracking.
-As a user I want to be able to add the date of my expenses to an app for tracking.
-As a user I want to be able to add the description of my expenses for future review.
-As a user I want the ability to categorize my expenses when entered.
-As a user I want to be able to see a listing of all my expenses entered.
-As a user I want to be able to see a listing of my expenses based on date ranges.
-As a user I want to be able to update a previously entered expense.
-As a user I want to be able to delete a previously entered expense.
+As a user I want to be able to add the amount of my expenses to an app for tracking,
+As a user I want to be able to add the date of my expenses to an app for tracking,
+As a user I want to be able to add the description of my expenses for future review,
+As a user I want the ability to categorize my expenses when entered,
+As a user I want to be able to see a listing of all my expenses entered,
+As a user I want to be able to see a listing of my expenses based on date ranges,
+As a user I want to be able to update a previously entered expense,
+As a user I want to be able to delete a previously entered expense,
 
 
 # Wire Frame Diagram
 ![ExpenseTrackerAppUserStories](ExpenseTrackerAppUserStories.jpg)
 ![ExpenseTrackerAppWireFrames](ExpenseTrackerAppWireFrames.jpg)
+![ExpenseTrackerAppScreenPrint](ExpenseTrackerAppScreenPrint.jpg)
