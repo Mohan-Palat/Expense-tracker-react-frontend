@@ -102,6 +102,7 @@ class ExpenseContainer extends Component {
 
   };
   
+  
   closeDatesModalGetExpenses = async (e, dates) => {
     e.preventDefault();
 
@@ -133,18 +134,18 @@ class ExpenseContainer extends Component {
       let expMonth  = expense['exp_date'].slice(8,11).toLowerCase()
       let expYYYY = expense['exp_date'].slice(12,16)
 
-      if (expMonth = 'jan'){expMM = '01'}
-      if (expMonth = 'feb'){expMM = '02'}
-      if (expMonth = 'mar'){expMM = '03'}
-      if (expMonth = 'apr'){expMM = '04'}
-      if (expMonth = 'may'){expMM = '05'}
-      if (expMonth = 'jun'){expMM = '06'}
-      if (expMonth = 'jul'){expMM = '07'}
-      if (expMonth = 'aug'){expMM = '08'}
-      if (expMonth = 'sep'){expMM = '09'}
-      if (expMonth = 'act'){expMM = '10'}
-      if (expMonth = 'nov'){expMM = '11'}
-      if (expMonth = 'dec'){expMM = '12'}
+      if (expMonth == 'jan'){expMM = '01'}
+      if (expMonth == 'feb'){expMM = '02'}
+      if (expMonth == 'mar'){expMM = '03'}
+      if (expMonth == 'apr'){expMM = '04'}
+      if (expMonth == 'may'){expMM = '05'}
+      if (expMonth == 'jun'){expMM = '06'}
+      if (expMonth == 'jul'){expMM = '07'}
+      if (expMonth == 'aug'){expMM = '08'}
+      if (expMonth == 'sep'){expMM = '09'}
+      if (expMonth == 'act'){expMM = '10'}
+      if (expMonth == 'nov'){expMM = '11'}
+      if (expMonth == 'dec'){expMM = '12'}
 
       let expDate = expYYYY + expMM + expDD
       console.log('expDate', expDate)
