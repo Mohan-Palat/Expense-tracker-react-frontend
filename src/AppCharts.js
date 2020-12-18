@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Button, Checkbox, Icon, Table } from 'semantic-ui-react'
 import AddExpenseModal from './AddExpenseModal'
-// import AddButton from './AddButton'
 
 class AppCharts extends Component {
     constructor(props) {
@@ -40,7 +39,6 @@ class AppCharts extends Component {
         <div className="addTransButton">
         <Button className="addTransBtn1" size='small' color="orange" onClick={() => this.props.openAndAdd()}>Add a New Transaction</Button>
         </div>
-        {/* <AddButton openAndAdd={this.props.openAndAdd} /> */}
         </div>
 
       </div>

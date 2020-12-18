@@ -1,26 +1,10 @@
 import React from 'react';
 import { Button, Checkbox, Icon, Table } from 'semantic-ui-react'
-// import Table from '@bit/semantic-org.semantic-ui-react.table'
-// import EditExpenseModal from './EditExpenseModal';
 
 function ExpenseList(props){
 
   const expenses = props.expenses.map((expense) => {
     return (
-
-        // <Table.Row key={expense.id}>
-        // <Table.Cell collapsing>
-        // </Table.Cell>
-        // <Table.Cell>{expense.exp_descr}</Table.Cell>
-        // <Table.Cell>{expense.exp_date}</Table.Cell>
-        // <Table.Cell>${expense.exp_amt}</Table.Cell>
-        // <Table.Cell>{expense.exp_category}</Table.Cell>
-        // <Table.Cell>
-        //     <Button size='small' onClick={() => props.openAndEdit(expense)}>Edit
-        //     </Button>
-        // </Table.Cell>
-        // <Table.Cell><Button size='small' color='orange' onClick={() => props.deleteExpense(expense.id)}>Delete</Button></Table.Cell>
-        // </Table.Row>
 
         <Table.Row key={expense.id}>
         <Table.Cell collapsing>
@@ -36,7 +20,6 @@ function ExpenseList(props){
             <Button class="ui button" size='mini' color='orange' onClick={() => props.deleteExpense(expense.id)}>Delete</Button>
           </div>  
         </Table.Cell>
-        {/* <Button size='mini' color='orange' onClick={() => props.deleteExpense(expense.id)}>Delete</Button> */}
         </Table.Row>
       
         )
@@ -44,7 +27,6 @@ function ExpenseList(props){
 
   return (
       <>  
-         {/* <Button size='small' onClick={() => props.openAndAdd()}>Add item</Button> */}
       <Table celled compact definition>
       <Table.Header fullWidth>
         <Table.Row>
@@ -54,13 +36,11 @@ function ExpenseList(props){
           <Table.HeaderCell>Amount</Table.HeaderCell>
           <Table.HeaderCell>Category</Table.HeaderCell>
           <Table.HeaderCell>Update Entry</Table.HeaderCell>
-          {/* <Table.HeaderCell>Delete</Table.HeaderCell> */}
         </Table.Row>
       </Table.Header>
       <Table.Body>
         { expenses }
         </Table.Body>
-        {/* </Table> */}
       </Table>
    
 

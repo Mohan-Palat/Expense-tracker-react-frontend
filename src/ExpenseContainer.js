@@ -6,7 +6,6 @@ import EditExpenseModal from './EditExpenseModal';
 import SelectDatesModal from './SelectDatesModal';
 import AppHeader from './AppHeader';
 import AppCharts from './AppCharts';
-// import { Modal, Form, Button, Label, Header } from 'semantic-ui-react';
 import { Modal, Form, Button, Label, Header, Table, Input, Dropdown, Content } from 'semantic-ui-react';
 
 
@@ -37,9 +36,7 @@ class ExpenseContainer extends Component {
       labels: [],
     };
   }
-  // expensesByDate = (expenses) => {
-  //   this.setState({ expenses: expenses });
-  // };
+
   componentDidMount() {
     console.log('in did mount')
     this.getExpenses();
@@ -53,8 +50,8 @@ class ExpenseContainer extends Component {
         process.env.REACT_APP_FLASK_API_URL + '/api/v1/expenses/'
       );
       console.log(parsedExpenses.data.data);
-      await this.setState({expenses: parsedExpenses.data.data}); //added 
-      await this.setState({expensesBkup: parsedExpenses.data.data}); //added 
+      await this.setState({expenses: parsedExpenses.data.data}); 
+      await this.setState({expensesBkup: parsedExpenses.data.data});  
       const exp = await this.parseExpenses(parsedExpenses.data.data);
 
     } catch (err) {
@@ -69,7 +66,6 @@ class ExpenseContainer extends Component {
         process.env.REACT_APP_FLASK_API_URL + '/api/v1/categories/'
       );
       
-      // this.setState({categories: allCategories.data.data}); 
       console.log(allCategories.data.data);
       console.log(this.state.categories);
 
@@ -96,8 +92,7 @@ class ExpenseContainer extends Component {
       reload: true,
       labels: expenseKeys,
       datasets: tempState,
-      // expenses: exp, //removed
-      // expensesBkup: exp, //removed
+
     }));
 
   };
@@ -143,7 +138,7 @@ class ExpenseContainer extends Component {
       if (expMonth == 'jul'){expMM = '07'}
       if (expMonth == 'aug'){expMM = '08'}
       if (expMonth == 'sep'){expMM = '09'}
-      if (expMonth == 'act'){expMM = '10'}
+      if (expMonth == 'oct'){expMM = '10'}
       if (expMonth == 'nov'){expMM = '11'}
       if (expMonth == 'dec'){expMM = '12'}
 
@@ -213,13 +208,8 @@ class ExpenseContainer extends Component {
     this.setState({
       showEditModal: false,
     });
-    // this.setState({
-    //   expenseToEdit: {
-    //     ...this.state.expenseToEdit,
-    //     [e.currentTarget.name]: e.currentTarget.value,
-    //   },
-    // });
   };
+
   closeAndEdit = async (e) => {
     e.preventDefault();
     try {
@@ -292,9 +282,7 @@ class ExpenseContainer extends Component {
           expenses={this.state.expenses}
           deleteExpense={this.deleteExpense}
           openAndEdit={this.openAndEdit}
-          //  open={this.state.showAddModal}
           openAndAdd={this.openAndAdd}
-          //  handleAdd={this.handleAdd}
           categories={this.state.categories}
         />
         <EditExpenseModal
